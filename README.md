@@ -1,70 +1,82 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Plans for Match Match (card game)
 
-## Available Scripts
+## Elevator pitch
 
-In the project directory, you can run:
+To play this card game, a deck of cards is spread out and laid face down. The player (or players) take turns in flipping two cards face up. The goal is to find the matching pairs of cards. 
 
-### `npm start`
+This game is also known as *Memory, Concentration, Matching Pairs*, or *Match Up*. Here is the [Wikipedia article](https://en.wikipedia.org/wiki/Concentration_(card_game)) on this game.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Last year, I implemented a 1-player version of this game using vanilla HTML, CSS, and JS. Here is my [GH repo](https://github.com/N-M-Luna/memory-card-game) and here is the [single-page app](https://n-m-luna.github.io/memory-card-game/). For my final project, I'd like to re-make this app using React; or *reactify my app*, if you will.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features (with wireframes)
 
-### `npm test`
+The game starts by shuffling and dealing a deck of 16 card (8 pairs of identical cards) face-down on the game board.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img src="img/screenshot1.png" alt="screenshot" title="Screenshot of the beginning of the game" width="50%" /> 
 
-### `npm run build`
+> Beginning of game
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In each turn, the player flips two cards. If they match, the player has solved the pair of cards and they remain facing up. If the cards do not match, they get flipped over again.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+https://user-images.githubusercontent.com/1752105/188282009-b124bf38-0c62-4725-b406-e4e9c7df6fae.mov
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> Game play
 
-### `npm run eject`
+The game ends when all the cards have been solved.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<img src="img/screenshot5.png" alt="screenshot" width="50%">
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> End of game
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+In the top left corner, there is a settings button that opens a **deck menu**. This allows the player to change the deck. *The deck library consists of six decks with the following themes: food, camping, animals, science, household, and tech.*
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<img src="img/screenshot9.png" alt="screenshot" width="50%">
 
-## Learn More
+> Deck menu
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+In the top right coner, there is a help button that opens a **help screen** with the rules of the game.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="img/screenshot10.png" alt="screenshot" width="50%">
 
-### Code Splitting
+> Game rules
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+### Nice-to-have features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+If my app can do everything desribed in the previous section (before the project is due), I would like to implement the following features.
 
-### Making a Progressive Web App
+* User can change levels. 
+* Browser remembers highest score. 
+* User can sign in to keep a record of their highest score.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Dependencies
 
-### Advanced Configuration
+Will not be using any external npm modules. Will be using React, *of course*. In particular, will use `useState` to keep track of the number of turns the user has played, which cards have been solved, and which cards are in the current turn. Depending on the complexity of the app, I might use `Routes` to change between the welcome/log-in route, the game route, and the game-over route.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+For layout and style, I *might* use Bootstrap. If authentication is being implemented, will use firebase.
 
-### Deployment
+## Game plan
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Make a first draft. 
 
-### `npm run build` fails to minify
+   1. Make a react app that has a `<GameBoard>` component with 16 `<Card>` components. The card's back will be an `<img>` and the card face will be one of eight different font awesome icons.
+   2. Whenever the user clicks on a card, it flips over.
+   3. Use JavaScript to "shuffle the cards" when the app starts.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Implement game logic. 
+
+   1. After the user clicks on two cards, we need to count the turn and then one of two things happen. Either the cards match and we update the status of those two cards as "solved"; or they don't match and we flip them back.
+   2. When all the cards in the deck have been solved, send an alert with the player's score.
+
+3. Use `Routes` to add a start game route and a game over route. The start game route is just a button to start the game. And the game over route displays the player's score (i.e., number of turns) and has a button to play again.
+
+4. Make a deck menu where the player can change between decks.
+
+5. Add in the extras.
+
+   1. Social icons in the footer.
+   2. User can change levels. 
+   3. Browser remembers highest score. 
+   4. User can sign in to keep a record of their highest score.
+   5. User can share their score in social media.
