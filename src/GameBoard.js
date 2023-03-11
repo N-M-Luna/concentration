@@ -1,9 +1,18 @@
 import React from 'react';
+import Card from './Card';
 
 function GameBoard() {
+
+    //Create a deck
+    const difficulty = 16
+    const deck = [] 
+    for (let i = 0; i < difficulty; i++) {
+        deck.push(<Card key={i} />);
+    }
+
     return(
         <div>
-            <p>Board is Loading</p>
+            {deck}
         </div>
     )
 }
