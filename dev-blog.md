@@ -99,3 +99,16 @@ Because it does, let's save and continue working on the Card component and some 
 
 `$ git commit -m "add Card component"`
 
+Next step is to make the cards flippable. But before that, I wanted to do some light editing to the style and layout. I'm arranging the Cards in rows for four by wrapping Cards in `div` containers in groups of four. 
+
+This *did not* work because each `Card` component returns a `div`. I will need this `div` container later on, so I'm going to make it display as a block element. Via className, I'm adding these CSS properties to the `Card`
+
+```
+  border: 1px solid gray;
+  display: inline-block;
+  height: 80px;
+  margin: 15px;
+  width: 80px;
+```
+
+I'm also adding some bulk to each card

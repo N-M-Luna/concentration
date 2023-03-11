@@ -12,7 +12,10 @@ function GameBoard() {
 
     return(
         <div>
-            {deck}
+            <div className='row'>{deck.slice(0,4)}</div>
+            <div className='row'>{deck.slice(4,8)}</div>
+            <div className='row'>{deck.slice(8,12)}</div>
+            <div className='row'>{deck.slice(12)}</div>
         </div>
     )
 }

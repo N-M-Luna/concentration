@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.card-slot {
+  border: 1px solid gray;
+  display: inline-block;
+  height: 80px;
+  margin: 15px;
+  width: 80px;
+}
+
 /*
 @keyframes App-logo-spin {
   from {
