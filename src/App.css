@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+/* TopBanner elements */
+
+h1 {
+  margin-bottom: 0;
+}
+
+.sub-title {
+  margin-top: 0;
+}
+
 /*
 The Card component is made up of the following divs:
 
@@ -36,6 +46,8 @@ The Card component is made up of the following divs:
 .card-logo, .card-face {
   backface-visibility: hidden;
   border: 1px solid gray;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px gray;
   color: white;
   height: 100%;
   position: absolute;

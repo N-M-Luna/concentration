@@ -326,8 +326,15 @@ And finally, use these two props as the className in the appropriate `span` tags
 
 Time for a save point!
 
-`$ git commit -m "shuffle the deck"`
+`$ git commit -m "add and shuffle the deck"`
 
+Before I start implementing the game logic, let's add a little bit of CSS. Here is what the app looks like after I decresed some vertical space in the TopBanner component and added rounded corners and box shadows in the Card components.
+
+![App's new style](./src/screenshot/5newStyle.png)
+
+I'm ready to save and continue on to the next part of development.
+
+`$ git commit -m "add some style"`
 
 ## Step 2. Implement game logic. 
 

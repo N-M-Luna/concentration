@@ -4,7 +4,7 @@ function TopBanner() {
     return(
         <div>
             <h1>Concentration</h1>
-            <h2><i>Card Game</i></h2>
+            <p className='sub-title'><i>Card Game</i></p>
         </div>
     )
 }
