@@ -1,14 +1,16 @@
 import React from 'react';
 import Card from './Card';
+import { animalDeck } from './deckLibrary.js';
 
 function GameBoard() {
-
-    //Create a deck
     const difficulty = 16
-    const deck = [] 
-    for (let i = 0; i < difficulty; i++) {
-        deck.push(<Card key={i} />);
-    }
+
+    //Grab a deck from the library
+    const deckLogo = animalDeck.logo
+    const deckFaces = fyShuffle(animalDeck.faces).slice(0,difficulty)
+
+    //Create a React deck
+    const deck = deckFaces.map((f, i) => <Card key={i} logo={deckLogo} face={f} />)
 
     return(
         <div>
@@ -18,6 +20,20 @@ function GameBoard() {
             <div className='row'>{deck.slice(12)}</div>
         </div>
     )
+}
+
+function fyShuffle(arr) {
+    let j, temp
+    let shuffledArray = arr
+
+    for (let i=arr.length-1; i>0; i--) { //For every i from array.length-1 until 1,
+        j = Math.floor(Math.random()*i) //Pick a number between 0 and i-1, and
+        temp = shuffledArray[j]
+        shuffledArray[j] = shuffledArray[i]
+        shuffledArray[i] = temp //Swap the i-th and the j-th elements.
+    }
+
+    return shuffledArray;
 }
 
 export default GameBoard;

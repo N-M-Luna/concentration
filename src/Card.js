@@ -2,21 +2,21 @@ import React from 'react';
 import { useState } from 'react';
 
 
-function Card() {
+function Card({logo, face}) {
     const [isFlipped, setFlipped] = useState(false);
 
     const flipCard = () => {
         setFlipped(!isFlipped);
     };
-    
+
     return (
         <div className='card-slot' onClick={flipCard}>
             <div className={isFlipped? 'card flipped-card' : 'card'}>
                 <div className='card-logo'>
-                    <span className='fa-solid fa-sun' />
+                    <span className={logo} />
                 </div>
                 <div className='card-face'>
-                    <span className="fa-solid fa-umbrella-beach" />
+                    <span className={face} />
                 </div>
             </div>
         </div>

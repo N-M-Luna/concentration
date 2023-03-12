@@ -240,17 +240,116 @@ Finally, the `.card div` will get the `.card` class always and the `.flipped-car
 
 ### 3. Create a deck and shuffle the cards
 
+Time to build a deck! Right now, the app is rendering 16 cards with a beach umbrella icon. Browsing [www.fontawesome.com](https://fontawesome.com/icons/), I compiled this list of card faces to use:
+
+- 'fa-solid fa-hippo'
+- 'fa-solid fa-fish'
+- 'fa-solid fa-otter'
+- 'fa-solid fa-kiwi-bird'
+- 'fa-solid fa-worm'
+- 'fa-solid fa-spider'
+- 'fa-solid fa-shrimp'
+- 'fa-solid fa-mosquito'
+- 'fa-solid fa-locust'
+- 'fa-solid fa-horse'
+- 'fa-solid fa-frog'
+- 'fa-solid fa-dove'
+- 'fa-solid fa-dog'
+- 'fa-solid fa-crow'
+- 'fa-solid fa-cow'
+- 'fa-solid fa-cat'
+
+These are from the animals icon collection. An appropriate deck logo is the 'fa-solid fa-paw' icon. I'm putting these strings in a separate file called deckLibrary.JS and, right now, it only has an "animalDeck" object:
+
+```
+const animalDeck = {
+    logo: 'fa-solid fa-paw',
+    faces: [
+        'fa-solid fa-hippo',
+        ...
+    ]
+}
+export {animalDeck};
+```
+
+Now that I have a deck object, what do I do with it? How do I get it to display in the Card components?
+
+The GameBoard component is where the Card components are created. So this is where the app will access this deck object, shuffle the faces, and pass it as props to the Card component.
+
+In the GameBoard.JS file, I'm importing the deck object:
+
+```
+import { animalDeck } from './deckLibrary.js';
+```
+
+And *inside* the GameBoard function body, I'm adding these lines to crete the props that will be passed onto the Card components.
+
+```
+//Grab a deck from the library
+const deckLogo = animalDeck.logo
+const deckFaces = fyShuffle(animalDeck.faces).slice(0,difficulty)
+```
+
+The "fyShuffle" function is my own, based on [Durstenfeld's version of the Fischer-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm) algorithm. 
+
+```
+function fyShuffle(arr) {
+    let j, temp
+    let shuffledArray = arr
+
+    for (let i=arr.length-1; i>0; i--) { //For every i from array.length-1 until 1,
+        j = Math.floor(Math.random()*i) //Pick a number between 0 and i-1, and
+        temp = shuffledArray[j]
+        shuffledArray[j] = shuffledArray[i]
+        shuffledArray[i] = temp //Swap the i-th and the j-th elements.
+    }
+
+    return shuffledArray;
+}
+```
+
+Now that the GameBoard has created/copied a deckLogo and an array of deckFaces, I can pass them as props to the Card components.
+
+```
+<Card key={i} logo={deckLogo} face={deckFaces[i]} />
+```
+
+Inside the Card component, I can receive these props.
+
+```
+function Card({logo, face}) {...}
+```
+
+And finally, use these two props as the className in the appropriate `span` tags. The app runs as expected. Every time the page is loaded, the deck is rendered in a different (random) order.
+
+![Deck is shuffled every time](./src/screenshot/4shuffleTheDeck.mov)
+
+Time for a save point!
+
+`$ git commit -m "shuffle the deck"`
+
+
 ## Step 2. Implement game logic. 
 
-### 1. After the user clicks on two cards, we need to count the turn and then one of two things happen. Either the cards match and we update the status of those two cards as "solved"; or they don't match and we flip them back.
+Define game play and write pseudo-code.
 
-### 2. When all the cards in the deck have been solved, send an alert with the player's score.
+### 1. onClick function
 
-## Step 3. Use `Routes` to add a start game route and a game over route. The start game route is just a button to start the game. And the game over route displays the player's score (i.e., number of turns) and has a button to play again.
+After the user clicks on two cards, we need to count the turn and then one of two things happen. Either the cards match and we update the status of those two cards as "solved"; or they don't match and we flip them back.
 
-## Step 4. Make a deck menu where the player can change between decks.
+### 2. Game over
 
-## Step 5. Add in the extras.
+When all the cards in the deck have been solved, send an alert with the player's score.
+
+## Step 3. Routes
+
+Use `Routes` to add a start game route and a game over route. The start game route is just a button to start the game. And the game over route displays the player's score (i.e., number of turns) and has a button to play again.
+
+## Step 4. Deck menu
+
+Make a deck menu where the player can change between decks.
+
+## Step 5. The extras and nice-to-haves
 
 ### 1. Social icons in the footer.
 
