@@ -2,21 +2,51 @@
   text-align: center;
 }
 
+/*
+The Card component is made up of the following divs:
+
+.card-slot div
+  .card div
+    .card-logo div (contains an image of the deck's logo)
+    .card-face div (contains an FA icon)
+
+*/
+
 .card-slot {
-  border: 1px solid gray;
+  background-color: transparent;
   display: inline-block;
   height: 80px;
+  perspective: 1000px;
   margin: 15px;
   width: 80px;
 }
 
-/*
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card {
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  width: 100%;
 }
-*/
+
+.flipped-card {
+  transform: rotateY(180deg);
+}
+
+.card-logo, .card-face {
+  backface-visibility: hidden;
+  border: 1px solid gray;
+  color: white;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+}
+
+.card-logo {
+  background-color: lightskyblue;
+}
+.card-face {
+  background-color: #fab387;
+  transform: rotateY(180deg);
+}
