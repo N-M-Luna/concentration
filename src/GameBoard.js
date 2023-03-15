@@ -1,13 +1,17 @@
 import React from 'react';
 import Card from './Card';
 import { animalDeck } from './deckLibrary.js';
+import { useState } from 'react';
 
 function GameBoard() {
     const difficulty = 16
+    const [cardsFlipped, setcardsFlipped] = useState([]);//cardsFlipped (array of indexes of cards that are flipped)
+    const [clickCounter, setclickCounter] = useState(0); //clickCounter (an int)
 
     //Grab a deck from the library
     const deckLogo = animalDeck.logo
-    const deckFaces = fyShuffle(animalDeck.faces).slice(0,difficulty)
+    const sortedDeckFaces = fyShuffle(animalDeck.faces).slice(0,difficulty/2)
+    const deckFaces = fyShuffle(sortedDeckFaces.concat(sortedDeckFaces))
 
     //Create a React deck
     const deck = deckFaces.map((f, i) => <Card key={i} logo={deckLogo} face={f} />)

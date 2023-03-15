@@ -13,11 +13,13 @@ Plan:
   1. After the user clicks on two cards, we need to count the turn and then one of two things happen. Either the cards match and we update the status of those two cards as "solved"; or they don't match and we flip them back.
   2. When all the cards in the deck have been solved, send an alert with the player's score.
 
-**Step 3**. Use `Routes` to add a start game route and a game over route. The start game route is just a button to start the game. And the game over route displays the player's score (i.e., number of turns) and has a button to play again.
+**Step 3**. Deploy Version 1.0.0 of the app.
 
-**Step 4**. Make a deck menu where the player can change between decks.
+**Step 4**. Use `Routes` to add a start game route and a game over route. The start game route is just a button to start the game. And the game over route displays the player's score (i.e., number of turns) and has a button to play again.
 
-**Step 5**. Add in the extras.
+**Step 5**. Make a deck menu where the player can change between decks.
+
+**Step 6**. Add in the extras.
 
 1. Social icons in the footer.
 2. User can change levels. 
@@ -338,25 +340,60 @@ I'm ready to save and continue on to the next part of development.
 
 ## Step 2. Implement game logic. 
 
-Define game play and write pseudo-code.
+Before I start coding, I want to define game play and write pseudo-code.
 
-### 1. onClick function
+1. The game starts when the page loads. 
+- Let d = numberOfCards. Build a deck of d/2 cards from the deckLibrary. Duplicate it and shuffle it.
+- Render the d cards.
+- Set states in:
+  - cardsFlipped (array of indexes of cards that are flipped originally an empty array)
+  - clickCounter (an integer originally 0)
+2. Whenever the user clicks on a card, the callback function does one of two things:
+- If clickCounter is odd, the player is starting a turn, so do the following:
+  - Increase clickCounter
+  - Flip the Card that was clicked.
+  - Add the index of the card clicked to the cardsFlipped array.
+- If the clickCounter is even, the player guessed at a apair of cards, so do the following:
+  - Increase clickCounter
+  - Flip the Card that was clicked.
+  - Let n be the index of the card clicked and m be the last element in the cardsFlipped array. 
+    - If n=m, then add n to the cardFlipped array. 
+    - Else, flip the cards with indexes n and m; and pop the last element in the cardFlipped array.
+  - If cardsFlipped.length = d, the game is over!
+
+
+### 1. Game Start
+
+Time to implement the beginning of the game:
+
+The game starts when the page loads. 
+- Let d = numberOfCards. Build a deck of d/2 cards from the deckLibrary. Duplicate it and shuffle it.
+- Render the d cards.
+- Set states in:
+  - cardsFlipped (array of indexes of cards that are flipped originally an empty array)
+  - clickCounter (an integer originally 0)
+
+### 2. onClick function
 
 After the user clicks on two cards, we need to count the turn and then one of two things happen. Either the cards match and we update the status of those two cards as "solved"; or they don't match and we flip them back.
 
-### 2. Game over
+### 3. Game over
 
 When all the cards in the deck have been solved, send an alert with the player's score.
 
-## Step 3. Routes
+## Step 3. Deploy version 1.0.0 of the app
+
+Options to deploy: Firebase, Vercel, Github pages.
+
+## Step 4. Routes
 
 Use `Routes` to add a start game route and a game over route. The start game route is just a button to start the game. And the game over route displays the player's score (i.e., number of turns) and has a button to play again.
 
-## Step 4. Deck menu
+## Step 5. Deck menu
 
 Make a deck menu where the player can change between decks.
 
-## Step 5. The extras and nice-to-haves
+## Step 6. The extras and nice-to-haves
 
 ### 1. Social icons in the footer.
 
